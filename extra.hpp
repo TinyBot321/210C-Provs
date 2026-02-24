@@ -2,7 +2,7 @@
 
 #include "main.h"
 
-void moveDist(int speed, int time);
+void moveDist(int speed, int inches);
 double clamp(double v, double min, double max);
 double wrapAngle(double angle);
 double weightedIMUAngle(pros::Imu &imu1, pros::Imu &imu2, double wi, double w2);
