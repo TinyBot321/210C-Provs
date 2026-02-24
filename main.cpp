@@ -5,7 +5,7 @@
 #include "Auton/RightElim.hpp"
 #include "Auton/SAWP.hpp"
 #include "Auton/Skills.hpp"
-#include "Auton/CounterSAWP.hpp"
+// #include "Auton/CounterSAWP.hpp"
 
 void initialize() {
     pros::lcd::initialize();
@@ -54,7 +54,7 @@ void autonomous() {
 			break;
 		case 4:
 			// Counter SAWP
-			CounterSAWP();
+			// CounterSAWP();
 			break;
 		case 5:
 			// Skills
@@ -82,13 +82,17 @@ void opcontrol() {
 			//lift up
 			if(LiftState == false && StickRot.get_position()/100 < 300){
 				Intake.move_voltage(12000);
-				Stick.move_voltage(12000);
+				if (auton == 5){
+					Stick.move_voltage(9000);
+				} else {
+					Stick.move_voltage(12000);
+				}
 				hoodState = true;
 			}
 			//lift down 
 			else if(LiftState == true && StickRot.get_position()/100 < 290){
 				Intake.move_voltage(12000);
-				Stick.move_voltage(5400);
+				Stick.move_voltage(4200);
 				hoodState = true;
 			}
 			else{
@@ -134,7 +138,7 @@ void opcontrol() {
 
 		if(master.get_digital(DIGITAL_Y)){
 			IntakeLift.set_value(true);
-			Intake.move_voltage(-3000);
+			Intake.move_voltage(-2900);
 		} else {
 			IntakeLift.set_value(false);
 		}
