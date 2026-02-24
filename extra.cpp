@@ -3,7 +3,6 @@
 #include "extra.hpp"
 
 void moveDist(int speed, int inches) {
-    // Speed is 0-127
     double rpm = 450;
     double wheel = 3.25;
     double time = abs((inches/((rpm/60)*2*wheel*3.1415926))*(127/speed)*1000);
@@ -246,7 +245,6 @@ void moveToXY(pros::Imu *imu1, pros::Imu *imu2, double imuW1, double imuW2, doub
 
         updateOdometry(V1, imu1, imu2, imuW1, imuW2, wheelDiam);
 
-        // ----- VECTOR TO TARGET -----
         double dx = targetX - odomX;
         double dy = targetY - odomY;
 
@@ -256,25 +254,25 @@ void moveToXY(pros::Imu *imu1, pros::Imu *imu2, double imuW1, double imuW2, doub
         double heading = getHeading(imu1, imu2, imuW1, imuW2);
         double turnError = wrapAngle(targetAngle - heading);
 
-        // ----- DISTANCE PID -----
+
         double distDeriv = distance - prevDistError;
         prevDistError = distance;
 
         double forward = kP_dist * distance + kD_dist * distDeriv;
         forward = clamp(forward, -100, 100);
 
-        // ----- TURN PID -----
+
         double turnDeriv = turnError - prevTurnError;
         prevTurnError = turnError;
 
         double turn = kP_turn * turnError + kD_turn * turnDeriv;
         turn = clamp(turn, -80, 80);
 
-        // ----- DRIVE -----
+
         DriveL.move(forward + turn);
         DriveR.move(forward - turn);
 
-        // ----- SETTLE -----
+
         if (distance < 0.75 && fabs(turnError) < 2)
             settleTime += 10;
         else
