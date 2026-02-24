@@ -6,7 +6,8 @@ void moveDist(int speed, int inches) {
     // Speed is 0-127
     double rpm = 450;
     double wheel = 3.25;
-    double time = (inches/((rpm/60)*2*wheel*3.1415926))*(127/speed)*1000;
+    double time = abs((inches/((rpm/60)*2*wheel*3.1415926))*(127/speed)*1000);
+    if (inches < 0) speed = -speed;
     DriveL.move(speed);
     DriveR.move(speed);
     pros::delay(time);
