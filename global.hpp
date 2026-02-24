@@ -24,6 +24,8 @@ extern lemlib::OdomSensors sensors;
 extern lemlib::ControllerSettings lateral_controller;
 extern lemlib::ControllerSettings angular_controller;
 extern lemlib::Chassis chassis;
+extern pros::Distance LeftDist;
+extern pros::Distance FrontDist;
 
 extern double odomX;
 extern double odomY;
