@@ -17,6 +17,8 @@ pros::adi::DigitalOut Wing('C');
 pros::adi::DigitalOut Park('G');
 pros::adi::DigitalIn FrontLimit('B');
 pros::adi::DigitalOut IntakeLift('F');
+pros::Distance LeftDist(13);
+pros::Distance FrontDist(17);
 lemlib::TrackingWheel Ver1(&V1, lemlib::Omniwheel::NEW_2, 0);
 
 lemlib::Drivetrain drivetrain(&DriveL, // left motor group
